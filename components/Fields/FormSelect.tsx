@@ -17,15 +17,7 @@ interface IProps {
 
 const FormSelect = (props: IProps) => {
   const { control, name, label, required, items } = props;
-  const pickerRef = useRef();
   const theme = useTheme();
-  // function open() {
-  //   pickerRef.current?.focus();
-  // }
-
-  // function close() {
-  //   pickerRef.current?.blur();
-  // }
   return (
     <Controller
       control={control}
@@ -42,9 +34,9 @@ const FormSelect = (props: IProps) => {
           <View style={{
                 borderWidth: 1,
                 backgroundColor: theme.colors.background,
-                borderRadius: 50,
+                borderRadius: 10,
                 borderColor: theme.colors.primary,
-                height: 48,
+                
                 }}>
             <Picker
                 selectedValue={value}
@@ -53,9 +45,10 @@ const FormSelect = (props: IProps) => {
                 }}
                 onBlur={onBlur}
                 mode="dropdown"
+                style={{ height: 50}}
             >
                 {items.map((item) => (
-                <Picker.Item label={item.label} value={item.value} />
+                <Picker.Item key={item.label} label={item.label} value={item.value} />
                 ))}
             </Picker>
           </View>

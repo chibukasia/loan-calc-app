@@ -33,7 +33,8 @@ const FormInput = (props: IProps) => {
             inputMode={type ?? "text"}
             mode="outlined"
             secureTextEntry={secret}
-            outlineStyle={{borderRadius: 50, borderColor: theme.colors.primary, height: 48}}
+            style={{height: 45}}
+            outlineStyle={{borderRadius: 10, borderColor: theme.colors.primary}}
           />
           {errors[name] && (
             <Text style={{ color: "red", fontSize: 10 }}>

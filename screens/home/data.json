@@ -1,0 +1,36 @@
+
+	{
+		"id": "cm6ji71gq0001vj533azeivw0",
+		"userId": "f2bb8cbc-9de9-4c9a-b92b-b389d9abc20c",
+		"principalAmount": 10000,
+		"interestRate": 5,
+		"interestRateType": "ANNUAL",
+		"termMonths": 24,
+		"repaymentFrequency": "ANNUAL",
+		"monthlyPayment": 5378.05,
+		"createdAt": "2025-01-30T15:42:03.049Z",
+		"updatedAt": "2025-01-30T15:42:03.049Z",
+		"amortizationSchedules": [
+			{
+				"id": "cm6ji71xm0003vj53xws1v38d",
+				"loanId": "cm6ji71gq0001vj533azeivw0",
+				"paymentDate": "2026-01-30T15:42:03.656Z",
+				"principalPaid": 4878.05,
+				"interestPaid": 500,
+				"balance": 5121.95,
+				"createdAt": "2025-01-30T15:42:03.658Z",
+				"updatedAt": "2025-01-30T15:42:03.658Z"
+			},
+			{
+				"id": "cm6ji72ee0005vj53yudlc8ae",
+				"loanId": "cm6ji71gq0001vj533azeivw0",
+				"paymentDate": "2027-01-30T15:42:03.656Z",
+				"principalPaid": 5121.95,
+				"interestPaid": 256.1,
+				"balance": 0,
+				"createdAt": "2025-01-30T15:42:04.262Z",
+				"updatedAt": "2025-01-30T15:42:04.262Z"
+			}
+		],
+		"totalToBePaid": 10756.1
+	}

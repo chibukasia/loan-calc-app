@@ -5,16 +5,38 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useWindowDimensions, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { userSchema } from "./schema";
+import { z } from "zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { registerUser } from "./api";
+import { useSession } from "./context";
+import { setStorageItemAsync } from "./context/useStorageState";
 
+export type EUser = z.infer<typeof userSchema>
 const RegisterScreen = () => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<EUser>({
     resolver: zodResolver(userSchema)
   });
   const router = useRouter();
   const { height } = useWindowDimensions();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const queryClient = useQueryClient()
+  const { signIn } = useSession()
+
+  const {mutate, isPending} = useMutation({
+    mutationKey: ['user'],
+    mutationFn: (data: EUser) => registerUser(data),
+    onSuccess(data, variables, context) {
+        setStorageItemAsync('token', data.token)
+        signIn(data.id)
+        router.replace('/')
+    },
+    onError: (error)=>{
+        console.log(error)
+    }
+  })
+
+  const onSubmit = (data: EUser) => {
+    mutate(data);
   };
   return (
     <View
@@ -49,6 +71,7 @@ const RegisterScreen = () => {
           onPress={handleSubmit(onSubmit)}
           mode="contained"
           style={{ width: 200 }}
+          loading={isPending}
         >
           Sign Up
         </Button>
