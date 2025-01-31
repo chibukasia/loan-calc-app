@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.chibukasiaexpo.loancalculator"
     },
     "web": {
       "bundler": "metro",
@@ -45,6 +46,12 @@
       "eas": {
         "projectId": "2f254068-a872-48c1-ad4a-67b51af50458"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2f254068-a872-48c1-ad4a-67b51af50458"
     }
   }
 }
