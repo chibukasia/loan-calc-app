@@ -22,7 +22,7 @@ const RegisterScreen = () => {
   const queryClient = useQueryClient()
   const { signIn } = useSession()
 
-  const {mutate, isPending} = useMutation({
+  const {mutate, isPending, isError, error} = useMutation({
     mutationKey: ['user'],
     mutationFn: (data: EUser) => registerUser(data),
     onSuccess(data, variables, context) {
@@ -30,7 +30,7 @@ const RegisterScreen = () => {
         signIn(data.id)
         router.replace('/')
     },
-    onError: (error)=>{
+    onError: (error: any)=>{
         console.log(error)
     }
   })
@@ -48,6 +48,7 @@ const RegisterScreen = () => {
         gap: 40
       }}
     >
+      {isError && <Text style={{color: 'red'}}>{error.response.data.error}</Text>}
       <Text style={{textAlign: 'center', fontSize: 18, fontWeight: 'bold'}}>Register Here</Text>
       <View style={{flexDirection: 'column', gap: 10}}>
         <FormInput control={control} name="name" label="Full Name" required />

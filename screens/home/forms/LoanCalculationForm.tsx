@@ -3,7 +3,7 @@ import FormSelect from "@/components/Fields/FormSelect";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import { loanSchema } from "./schema";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -36,14 +36,14 @@ const LoanCalculationForm = ({setLoanResults}: IProps) => {
   });
 
   const queryClient = useQueryClient();
-  const { mutate, isPending, data } = useMutation({
+  const { mutate, isPending, data, error, isError } = useMutation({
     mutationKey: ["loan"],
     mutationFn: (data: FData) => calculateLoan(data),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["loan"] });
       setLoanResults(data.loan)
     },
-    onError(error, variables, context) {
+    onError(error: any, variables, context) {
       console.log(error);
     },
   });
@@ -58,6 +58,7 @@ const LoanCalculationForm = ({setLoanResults}: IProps) => {
 
   return (
     <View style={{ gap: 10 }}>
+      {isError && <Text style={{color: 'red'}}>{error.response.data.error}</Text>}
       <FormInput
         control={control}
         name="amount"
